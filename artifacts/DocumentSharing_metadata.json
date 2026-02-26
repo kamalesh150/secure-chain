@@ -1,0 +1,759 @@
+{
+	"compiler": {
+		"version": "0.8.30+commit.73712a01"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "documentId",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "recipient",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "grantedAt",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "expiresAt",
+						"type": "uint256"
+					}
+				],
+				"name": "AccessGranted",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "documentId",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "recipient",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "timestamp",
+						"type": "uint256"
+					}
+				],
+				"name": "AccessRevoked",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "documentId",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "timestamp",
+						"type": "uint256"
+					}
+				],
+				"name": "DocumentDeleted",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "documentId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "ipfsHash",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "fileName",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "bytes32",
+						"name": "fileHash",
+						"type": "bytes32"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "timestamp",
+						"type": "uint256"
+					}
+				],
+				"name": "DocumentUploaded",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "documentId",
+						"type": "uint256"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "verifier",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "bool",
+						"name": "success",
+						"type": "bool"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "timestamp",
+						"type": "uint256"
+					}
+				],
+				"name": "DocumentVerified",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "accessPermissions",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "canView",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "grantedAt",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "expiresAt",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_documentId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "_user",
+						"type": "address"
+					}
+				],
+				"name": "checkAccess",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_documentId",
+						"type": "uint256"
+					}
+				],
+				"name": "deleteDocument",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "documentCount",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "documents",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "ipfsHash",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "fileName",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "description",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "category",
+						"type": "string"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "fileHash",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "uint256",
+						"name": "timestamp",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"internalType": "bool",
+						"name": "exists",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_documentId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "_user",
+						"type": "address"
+					}
+				],
+				"name": "getAccessDetails",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "canView",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "grantedAt",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "expiresAt",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "expired",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_documentId",
+						"type": "uint256"
+					}
+				],
+				"name": "getDocument",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "ipfsHash",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "fileName",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "description",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "category",
+						"type": "string"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "fileHash",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "uint256",
+						"name": "timestamp",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_owner",
+						"type": "address"
+					}
+				],
+				"name": "getMyDocuments",
+				"outputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "",
+						"type": "uint256[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_user",
+						"type": "address"
+					}
+				],
+				"name": "getSharedWithMe",
+				"outputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "",
+						"type": "uint256[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getTotalDocuments",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_documentId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "_recipient",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_expiresAt",
+						"type": "uint256"
+					}
+				],
+				"name": "grantAccess",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_documentId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "_user",
+						"type": "address"
+					}
+				],
+				"name": "isAccessExpired",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "ownerDocuments",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_documentId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "_recipient",
+						"type": "address"
+					}
+				],
+				"name": "revokeAccess",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "sharedWithMe",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_ipfsHash",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_fileName",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_description",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_category",
+						"type": "string"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "_fileHash",
+						"type": "bytes32"
+					}
+				],
+				"name": "uploadDocument",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_documentId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "_ipfsHash",
+						"type": "string"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "_fileHash",
+						"type": "bytes32"
+					}
+				],
+				"name": "verifyDocument",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "valid",
+						"type": "bool"
+					},
+					{
+						"internalType": "address",
+						"name": "storedOwner",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "uploadTime",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "fileName",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "category",
+						"type": "string"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"details": "Decentralized document sharing, certificate storage, and verification system.      Uses IPFS hashes for file references and keccak256 for integrity verification. NEW in this version:  - fileHash field for on-chain integrity verification  - description / category fields per document  - Access expiry timestamps (0 = no expiry)  - verifyDocument()  – public verification without needing access  - getAccessDetails() – returns grantedAt + expiresAt for an address  - DocumentVerified event  - isAccessExpired() helper",
+			"kind": "dev",
+			"methods": {
+				"grantAccess(uint256,address,uint256)": {
+					"params": {
+						"_documentId": "ID of the document.",
+						"_expiresAt": "Unix timestamp for expiry; pass 0 for no expiry.",
+						"_recipient": "Address to grant access to."
+					}
+				},
+				"uploadDocument(string,string,string,string,bytes32)": {
+					"params": {
+						"_category": "Category string (e.g. \"certificate\", \"contract\").",
+						"_description": "Short human-readable title / description.",
+						"_fileHash": "keccak256 of raw file bytes, computed client-side.",
+						"_fileName": "Original file name.",
+						"_ipfsHash": "IPFS CID of the file."
+					}
+				},
+				"verifyDocument(uint256,string,bytes32)": {
+					"params": {
+						"_documentId": "ID of the document to verify.",
+						"_fileHash": "keccak256 of file bytes; pass bytes32(0) to skip check.",
+						"_ipfsHash": "IPFS CID to compare against the stored one."
+					},
+					"returns": {
+						"storedOwner": "  The owner address recorded on-chain.",
+						"uploadTime": "   When the document was originally uploaded.",
+						"valid": "        True if both provided values match stored values."
+					}
+				}
+			},
+			"title": "DocumentSharing",
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {
+				"checkAccess(uint256,address)": {
+					"notice": "Check if an address currently has valid (non-expired) access."
+				},
+				"deleteDocument(uint256)": {
+					"notice": "Soft-delete a document (only owner)."
+				},
+				"getAccessDetails(uint256,address)": {
+					"notice": "Get full access details for a user on a document."
+				},
+				"getDocument(uint256)": {
+					"notice": "Retrieve full document details. Caller must be owner or have valid access."
+				},
+				"getMyDocuments(address)": {
+					"notice": "Get all document IDs owned by an address."
+				},
+				"getSharedWithMe(address)": {
+					"notice": "Get all document IDs shared with an address."
+				},
+				"getTotalDocuments()": {
+					"notice": "Total number of documents ever uploaded."
+				},
+				"grantAccess(uint256,address,uint256)": {
+					"notice": "Grant view access to a recipient, optionally with an expiry."
+				},
+				"isAccessExpired(uint256,address)": {
+					"notice": "Check whether an address's access has expired."
+				},
+				"revokeAccess(uint256,address)": {
+					"notice": "Revoke view access from a recipient."
+				},
+				"uploadDocument(string,string,string,string,bytes32)": {
+					"notice": "Upload a new document / certificate."
+				},
+				"verifyDocument(uint256,string,bytes32)": {
+					"notice": "Verify a document by matching the provided IPFS hash and/or file hash.         This is public — anyone can call it for certificate verification."
+				}
+			},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"DocumentSharing.sol": "DocumentSharing"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"DocumentSharing.sol": {
+			"keccak256": "0x37d251e1f14fb0842b4de8a09da8693bb3eb07a933acbb256cdd36663c86748a",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://7ef15b11473a6343dcc6a2d46bb0f3cef3081148da76acb58a9b748e88b45b00",
+				"dweb:/ipfs/QmYhG9EosJfiJ6J6sPBSbWby3EbwVuM24QFqi3Ue8YjbFc"
+			]
+		}
+	},
+	"version": 1
+}
